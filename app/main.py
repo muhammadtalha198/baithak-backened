@@ -2,10 +2,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
+from contextlib import asynccontextmanager
+frm app.dependencies import init_redis, close_redis
 
 app = FastAPI(title="Baithak API", version="0.1.0-mvp")
 
-app = FastAPI(title="Baithak API", version="0.1.0-mvp", description=" API ")
+app = FastAPI(title="Baithak API", version="0.1.0-mvp", description=" API ", lifespan=lifespan)
 
 # CORS — allow React dev server and production frontend
 app.add_middleware(
@@ -15,6 +17,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await init_redis()
+    yield
+    await close_redis()
 
 
 
