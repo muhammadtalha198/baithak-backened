@@ -40,6 +40,8 @@ async def register(
         user = await register_user(db, body)
     except AuthError as exc:
         raise HTTPException(status_code=exc.status_code, detail=exc.message) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Registration failed: {exc}") from exc
 
     return _auth_response(user)
 

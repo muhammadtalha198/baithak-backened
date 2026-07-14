@@ -37,9 +37,7 @@ async def register_user(db: AsyncSession, data: RegisterRequest) -> User:
     if existing.scalar_one_or_none():
         raise AuthError("An account with this email or phone already exists", 409)
 
-    config_result = await db.execute(
-        select(AppConfig).where(AppConfig.id == 1).with_for_update()
-    )
+    config_result = await db.execute(select(AppConfig).where(AppConfig.id == 1))
     config = config_result.scalar_one_or_none()
     if config is None:
         config = AppConfig(id=1, registration_count=0)
