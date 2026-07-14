@@ -10,11 +10,17 @@ class Settings(BaseSettings):
 
     # Database & cache
     DATABASE_URL: str = ""
+    DATABASE_URL_UNPOOLED: str = ""
     REDIS_URL: str = ""
 
     # JWT
     JWT_SECRET: str = ""
     JWT_EXPIRE_MINUTES: int = 15
+
+    @property
+    def database_url(self) -> str:
+        """Prefer Neon direct (unpooled) connection on Vercel."""
+        return (self.DATABASE_URL_UNPOOLED or self.DATABASE_URL or "").strip()
 
     # Frontend & OTP
     FRONTEND_URL: str = "http://localhost:5173"

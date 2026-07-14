@@ -33,7 +33,7 @@ def normalize_database_url(url: str) -> str:
 engine = None
 AsyncSessionLocal = None
 
-_db_url = normalize_database_url(settings.DATABASE_URL)
+_db_url = normalize_database_url(settings.database_url)
 if _db_url:
     engine = create_async_engine(
         _db_url,

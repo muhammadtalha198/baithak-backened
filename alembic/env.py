@@ -11,7 +11,7 @@ from baithak.database import Base, normalize_database_url
 import baithak.models  # noqa: F401 — register models
 
 config = context.config
-config.set_main_option("sqlalchemy.url", normalize_database_url(settings.DATABASE_URL))
+config.set_main_option("sqlalchemy.url", normalize_database_url(settings.database_url))
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)

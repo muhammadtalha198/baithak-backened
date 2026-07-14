@@ -37,5 +37,5 @@ async def root():
 
 @app.get("/health")
 async def health():
-    ready = bool(settings.DATABASE_URL and settings.JWT_SECRET)
-    return {"status": "ok" if ready else "misconfigured", "database": bool(settings.DATABASE_URL)}
+    ready = bool(settings.database_url and settings.JWT_SECRET)
+    return {"status": "ok" if ready else "misconfigured", "database": bool(settings.database_url)}

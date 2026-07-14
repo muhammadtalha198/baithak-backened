@@ -16,7 +16,7 @@ class AuthError(Exception):
 
 
 def _require_config() -> None:
-    if not settings.DATABASE_URL:
+    if not settings.database_url:
         raise AuthError("Server misconfigured: DATABASE_URL is not set", 503)
     if not settings.JWT_SECRET:
         raise AuthError("Server misconfigured: JWT_SECRET is not set", 503)
