@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.config import settings
-from app.routers import auth
+from baithak.config import settings
+from baithak.routers import auth
 
 app = FastAPI(
     title="Baithak API",

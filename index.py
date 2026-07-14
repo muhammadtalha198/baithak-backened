@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 
 def _build_app() -> FastAPI:
     try:
-        from app.server import app as application
+        from baithak.server import app as application
 
         return application
     except Exception as exc:

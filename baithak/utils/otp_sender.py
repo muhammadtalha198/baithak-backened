@@ -1,7 +1,7 @@
 # app/utils/otp_sender.py
 import logging
 
-from app.config import settings
+from baithak.config import settings
 
 logger = logging.getLogger(__name__)
 

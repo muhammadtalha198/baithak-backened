@@ -1,11 +1,11 @@
 from sqlalchemy import or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.config import settings
-from app.models.app_config import AppConfig
-from app.models.user import User
-from app.schemas.auth import LoginRequest, RegisterRequest
-from app.utils.security import hash_password, verify_password
+from baithak.config import settings
+from baithak.models.app_config import AppConfig
+from baithak.models.user import User
+from baithak.schemas.auth import LoginRequest, RegisterRequest
+from baithak.utils.security import hash_password, verify_password
 
 
 class AuthError(Exception):

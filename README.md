@@ -12,7 +12,7 @@ pip install -r requirements.txt
 cp .env.example .env
 docker compose up -d postgres redis
 alembic upgrade head
-uvicorn app.server:app --reload --port 8000
+uvicorn baithak.server:app --reload --port 8000
 ```
 
 API docs: http://localhost:8000/docs

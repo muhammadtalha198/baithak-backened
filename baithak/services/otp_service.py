@@ -5,7 +5,7 @@ import secrets
 
 import redis.asyncio as redis
 
-from app.config import settings
+from baithak.config import settings
 
 OTP_KEY_PREFIX = "otp:pending:"
 MAX_ATTEMPTS = 5

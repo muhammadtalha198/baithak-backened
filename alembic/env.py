@@ -6,9 +6,9 @@ from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from app.config import settings
-from app.database import Base
-import app.models  # noqa: F401 — register models
+from baithak.config import settings
+from baithak.database import Base
+import baithak.models  # noqa: F401 — register models
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)

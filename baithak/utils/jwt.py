@@ -3,7 +3,7 @@ from uuid import UUID
 
 from jose import JWTError, jwt
 
-from app.config import settings
+from baithak.config import settings
 
 ALGORITHM = "HS256"
 

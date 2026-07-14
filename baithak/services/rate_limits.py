@@ -1,7 +1,7 @@
 # app/services/rate_limit.py
 import redis.asyncio as redis
 
-from app.config import settings
+from baithak.config import settings
 
 async def check_rate_limit(
     redis_client: redis.Redis,

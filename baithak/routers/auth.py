@@ -2,12 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from redis.asyncio import Redis
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.dependencies import get_redis
-from app.database import get_db
-from app.schemas.auth import AuthResponse, LoginRequest, RegisterRequest, UserResponse
-from app.services.auth_service import AuthError, get_user_by_id, login_user, register_user
-from app.services.rate_limits import is_register_allowed
-from app.utils.jwt import create_access_token, decode_access_token
+from baithak.dependencies import get_redis
+from baithak.database import get_db
+from baithak.schemas.auth import AuthResponse, LoginRequest, RegisterRequest, UserResponse
+from baithak.services.auth_service import AuthError, get_user_by_id, login_user, register_user
+from baithak.services.rate_limits import is_register_allowed
+from baithak.utils.jwt import create_access_token, decode_access_token
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 

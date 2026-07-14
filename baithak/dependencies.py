@@ -3,7 +3,7 @@ from collections.abc import AsyncGenerator
 
 import redis.asyncio as redis
 
-from app.config import settings
+from baithak.config import settings
 
 _redis: redis.Redis | None = None
 
