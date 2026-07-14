@@ -1,0 +1,13 @@
+.venv
+.git
+__pycache__
+*.pyc
+.env
+.env.*
+!.env.example
+!.env.production.example
+docker-compose*.yml
+Dockerfile
+scripts/
+DEPLOY.md
+.github/

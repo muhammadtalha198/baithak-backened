@@ -31,9 +31,9 @@ async def register(
     body: RegisterRequest,
     request: Request,
     db: AsyncSession = Depends(get_db),
-    redis: Redis = Depends(get_redis),
+    redis: Redis | None = Depends(get_redis),
 ):
-    if not await is_register_allowed(redis, _client_ip(request)):
+    if redis is not None and not await is_register_allowed(redis, _client_ip(request)):
         raise HTTPException(status_code=429, detail="Too many registration attempts. Try again later.")
 
     try:

@@ -10,7 +10,7 @@ class Settings(BaseSettings):
 
     # Database & cache
     DATABASE_URL: str
-    REDIS_URL: str = "redis://localhost:6379/0"
+    REDIS_URL: str = ""
 
     # JWT (used in Phase 7)
     JWT_SECRET: str

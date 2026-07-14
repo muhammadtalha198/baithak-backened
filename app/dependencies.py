@@ -7,16 +7,25 @@ from app.config import settings
 
 _redis: redis.Redis | None = None
 
+
 async def init_redis() -> None:
     global _redis
-    _redis = redis.from_url(settings.REDIS_URL, decode_responses=True)
+    if not settings.REDIS_URL:
+        return
+    try:
+        client = redis.from_url(settings.REDIS_URL, decode_responses=True)
+        await client.ping()
+        _redis = client
+    except Exception:
+        _redis = None
+
 
 async def close_redis() -> None:
     global _redis
     if _redis:
         await _redis.close()
+        _redis = None
 
-async def get_redis() -> AsyncGenerator[redis.Redis, None]:
-    if _redis is None:
-        raise RuntimeError("Redis not initialized")
+
+async def get_redis() -> AsyncGenerator[redis.Redis | None, None]:
     yield _redis

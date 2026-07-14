@@ -15,7 +15,9 @@ async def check_rate_limit(
         await redis_client.expire(key, window_seconds)
     return count <= limit
 
-async def is_register_allowed(redis_client: redis.Redis, ip: str) -> bool:
+async def is_register_allowed(redis_client: redis.Redis | None, ip: str) -> bool:
+    if redis_client is None:
+        return True
     key = f"rate:register:{ip}"
     return await check_rate_limit(
         redis_client, key,
