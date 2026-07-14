@@ -23,6 +23,18 @@ app.add_middleware(
 app.include_router(auth.router)
 
 
+@app.get("/")
+async def root():
+    return {
+        "name": "Baithak API",
+        "status": "running",
+        "health": "/health",
+        "docs": "/docs",
+        "register": "/auth/register",
+        "login": "/auth/login",
+    }
+
+
 @app.get("/health")
 async def health():
     ready = bool(settings.DATABASE_URL and settings.JWT_SECRET)
