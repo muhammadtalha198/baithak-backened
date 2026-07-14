@@ -6,23 +6,29 @@ from sqlalchemy.orm import DeclarativeBase
 
 from app.config import settings
 
-# postgresql+asyncpg://... from .env
-engine = create_async_engine(
-    settings.DATABASE_URL,
-    echo=False,          # set True to log SQL in dev
-    pool_pre_ping=True,
-)
+engine = None
+AsyncSessionLocal = None
 
-AsyncSessionLocal = async_sessionmaker(
-    engine,
-    class_=AsyncSession,
-    expire_on_commit=False,
-)
+if settings.DATABASE_URL:
+    engine = create_async_engine(
+        settings.DATABASE_URL,
+        echo=False,
+        pool_pre_ping=True,
+    )
+    AsyncSessionLocal = async_sessionmaker(
+        engine,
+        class_=AsyncSession,
+        expire_on_commit=False,
+    )
+
 
 class Base(DeclarativeBase):
     pass
 
+
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    if AsyncSessionLocal is None:
+        raise RuntimeError("DATABASE_URL is not configured")
     async with AsyncSessionLocal() as session:
         try:
             yield session

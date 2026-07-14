@@ -25,4 +25,5 @@ app.include_router(auth.router)
 
 @app.get("/health")
 async def health():
-    return {"status": "ok"}
+    ready = bool(settings.DATABASE_URL and settings.JWT_SECRET)
+    return {"status": "ok" if ready else "misconfigured", "database": bool(settings.DATABASE_URL)}

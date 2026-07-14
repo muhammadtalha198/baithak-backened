@@ -9,11 +9,11 @@ class Settings(BaseSettings):
     )
 
     # Database & cache
-    DATABASE_URL: str
+    DATABASE_URL: str = ""
     REDIS_URL: str = ""
 
-    # JWT (used in Phase 7)
-    JWT_SECRET: str
+    # JWT
+    JWT_SECRET: str = ""
     JWT_EXPIRE_MINUTES: int = 15
 
     # Frontend & OTP

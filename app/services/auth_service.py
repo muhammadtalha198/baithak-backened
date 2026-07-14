@@ -15,7 +15,15 @@ class AuthError(Exception):
         super().__init__(message)
 
 
+def _require_config() -> None:
+    if not settings.DATABASE_URL:
+        raise AuthError("Server misconfigured: DATABASE_URL is not set", 503)
+    if not settings.JWT_SECRET:
+        raise AuthError("Server misconfigured: JWT_SECRET is not set", 503)
+
+
 async def register_user(db: AsyncSession, data: RegisterRequest) -> User:
+    _require_config()
     email = str(data.email).lower() if data.email else None
     phone = data.phone
 
@@ -56,6 +64,7 @@ async def register_user(db: AsyncSession, data: RegisterRequest) -> User:
 
 
 async def login_user(db: AsyncSession, data: LoginRequest) -> User:
+    _require_config()
     email = str(data.email).lower() if data.email else None
     phone = data.phone
 
